@@ -43,18 +43,48 @@ public class HangMan {
             }
         } while (! wordIsGuessed);
         
-        System.out.println("\nThe word is " + words[randWord] +
-            " You missed " + (triesCount - findEmptyPosition(wordLetters)) +
-            " time(s)");
+        System.out.println("\nThe word is " + words[randWord] + " You missed " 
+                + (triesCount - findEmptyPosition(wordLetters)) + " time(s)");
   
     }
 
-    private static int guessLetter(String word, char[] wordLetters) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        public static int guessLetter(String word, char[] guessedLetters) {
+        System.out.print("(Guess) Enter a letter in word ");
+        
+        if (! printWord(word, guessedLetters)) {
+            return 3;  //returns 3 if all letters were guessed
+        } 
+        
+        System.out.print(" > ");
+        
+        int emptyPosition = findEmptyPosition(guessedLetters);
+        
+        Scanner input = new Scanner(System.in);
+        char userInput = input.nextLine().charAt(0);
+        
+        if (inGuessedLetters(userInput, guessedLetters)) { // a repeat guess
+            System.out.println(userInput + " is already in the word");
+            return 2; //returns 2 if already guessed letter was re-entered
+        } else if (word.contains(String.valueOf(userInput))) {
+            guessedLetters[emptyPosition] = userInput;
+            return 1; //returns 1 if letter were entered 1st time (counts as try)
+        } else {
+            System.out.println(userInput + " is not in the word");
+            return 0; //returns 0 if letter entered is not in the word (counts as try)
+        }
     }
 
-    private static int findEmptyPosition(char[] wordLetters) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * 
+     * @param enteredLetters
+     * @return 
+     */
+    public static int findEmptyPosition(char[] enteredLetters) {
+        int i = 0;
+        while (enteredLetters[i] != '\u0000'){
+            i++;
+        }
+        return i;
     }
-    
+        
 }
