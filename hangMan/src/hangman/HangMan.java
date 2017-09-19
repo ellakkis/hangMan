@@ -6,6 +6,7 @@
 package hangman;
 
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  *
@@ -13,63 +14,66 @@ import java.util.Random;
  */
 public class HangMan {
 
+    public static int triesCount = 0;
+    public static boolean wordIsGuessed = false;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         String[] words = {"house", "banana", "dog", "school"};
-        int triesCount = 0;
+        
         Random rand = new Random();
         int  randWord = rand.nextInt(3);
         
         char[] wordLetters = new char[words[randWord].length()];
         
-        boolean wordIsGuessed = false;
+        
         
 
         do {
             switch (guessLetter(words[randWord], wordLetters)) {
                 case 0: 
                     triesCount++;
+                    System.out.println("number of tirals: " + triesCount + "\n");
                     break;
                 case 1: 
-                    triesCount++;
+                    System.out.println("number of tirals: " + triesCount + "\n");
                     break;
                 case 2: 
+                    System.out.println("number of tirals: " + triesCount + "\n");
                     break;
                 case 3: 
                     wordIsGuessed = true;
-                    break;
+                    System.out.println("\nBravoo...The word is " + words[randWord] + " You missed " 
+                + (triesCount) + " time(s)");
+                    System.exit(0);
             }
         } while (! wordIsGuessed);
-        
-        System.out.println("\nThe word is " + words[randWord] + " You missed " 
-                + (triesCount - findEmptyPosition(wordLetters)) + " time(s)");
   
     }
 
-        public static int guessLetter(String word, char[] guessedLetters) {
-        System.out.print("(Guess) Enter a letter in word ");
-        
+    public static int guessLetter(String word, char[] guessedLetters) {
+        if(wordIsGuessed == false) System.out.print("(Guess) Enter a letter in word ");
+
         if (! printWord(word, guessedLetters)) {
             return 3;  //returns 3 if all letters were guessed
         } 
-        
+
         System.out.print(" > ");
-        
+
         int emptyPosition = findEmptyPosition(guessedLetters);
-        
+
         Scanner input = new Scanner(System.in);
         char userInput = input.nextLine().charAt(0);
-        
-        if (inGuessedLetters(userInput, guessedLetters)) { // a repeat guess
-            System.out.println(userInput + " is already in the word");
+
+        if (inGuessedLetters(userInput, guessedLetters)) {
+            System.out.println(userInput + " is already in the word.");
             return 2; //returns 2 if already guessed letter was re-entered
         } else if (word.contains(String.valueOf(userInput))) {
             guessedLetters[emptyPosition] = userInput;
-            return 1; //returns 1 if letter were entered 1st time (counts as try)
+            return 1; //returns 1 if letter were entered 1st time  (don't count for a try)
         } else {
-            System.out.println(userInput + " is not in the word");
+            System.out.println(userInput + " is not in the word.");
             return 0; //returns 0 if letter entered is not in the word (counts as try)
         }
     }
@@ -86,5 +90,36 @@ public class HangMan {
         }
         return i;
     }
-        
+    
+    /**
+     * to print the word with the needed astrix
+     * @param word
+     * @param enteredLetters
+     * @return 
+     */
+    public static boolean printWord(String word, char[] enteredLetters) {
+
+        boolean starsPrinted = false;
+        for (int i = 0; i < word.length(); i++) {
+            char letter = word.charAt(i);
+
+            if (inGuessedLetters(letter, enteredLetters)){
+                System.out.print(letter); 
+            } else {
+                System.out.print('*');
+                starsPrinted = true;
+            }
+        }
+        return starsPrinted;
+    }
+    
+    /**
+     * 
+     * @param letter
+     * @param enteredLetters
+     * @return 
+     */
+    public static boolean inGuessedLetters(char letter, char[] enteredLetters) {
+        return new String(enteredLetters).contains(String.valueOf(letter));
+    }    
 }
