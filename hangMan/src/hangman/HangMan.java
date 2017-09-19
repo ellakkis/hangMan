@@ -20,10 +20,10 @@ public class HangMan {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String[] words = {"house", "banana", "dog", "school"};
+        String[] words = {"write", "that","goast", "cocoa", "cat", "plain"};
         
-        Random rand = new Random();
-        int  randWord = rand.nextInt(3);
+        Random rand = new Random(System.currentTimeMillis());
+        int  randWord = rand.nextInt(5);
         
         char[] wordLetters = new char[words[randWord].length()];
         
@@ -44,7 +44,7 @@ public class HangMan {
                     break;
                 case 3: 
                     wordIsGuessed = true;
-                    System.out.println("\nBravoo...The word is " + words[randWord] + " You missed " 
+                    System.out.println("\nBravoo...The word is \"" + words[randWord] + "\" You missed " 
                 + (triesCount) + " time(s)");
                     System.exit(0);
             }
@@ -53,12 +53,15 @@ public class HangMan {
     }
 
     public static int guessLetter(String word, char[] guessedLetters) {
-        if(wordIsGuessed == false) System.out.print("(Guess) Enter a letter in word ");
-
+        if(wordIsGuessed == false) {
+            System.out.print("Enter a letter in word ");
+        }
+        
         if (! printWord(word, guessedLetters)) {
             return 3;  //returns 3 if all letters were guessed
         } 
 
+        
         System.out.print(" > ");
 
         int emptyPosition = findEmptyPosition(guessedLetters);
