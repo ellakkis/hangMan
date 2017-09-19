@@ -27,6 +27,34 @@ public class HangMan {
         boolean wordIsGuessed = false;
         
 
+        do {
+            switch (guessLetter(words[randWord], wordLetters)) {
+                case 0: 
+                    triesCount++;
+                    break;
+                case 1: 
+                    triesCount++;
+                    break;
+                case 2: 
+                    break;
+                case 3: 
+                    wordIsGuessed = true;
+                    break;
+            }
+        } while (! wordIsGuessed);
+        
+        System.out.println("\nThe word is " + words[randWord] +
+            " You missed " + (triesCount - findEmptyPosition(wordLetters)) +
+            " time(s)");
+  
+    }
+
+    private static int guessLetter(String word, char[] wordLetters) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private static int findEmptyPosition(char[] wordLetters) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
