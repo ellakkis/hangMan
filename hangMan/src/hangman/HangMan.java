@@ -33,7 +33,7 @@ public class HangMan {
                     words = new String[] {"cat", "dog", "butterfly", "snake", "wolf"};
                     break;
                 case 4: //food
-                    
+                    words = new String[] {"pizza", "rice", "meat", "chicken", "hotdog"};
                     break;
                 default:
                     break;
