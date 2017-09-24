@@ -30,7 +30,7 @@ public class HangMan {
                     words = new String[] {"tennis", "soccer", "football", "swimming", "vollyball"};
                     break;
                 case 3: //animals
-                    
+                    words = new String[] {"cat", "dog", "butterfly", "snake", "wolf"};
                     break;
                 case 4: //food
                     
