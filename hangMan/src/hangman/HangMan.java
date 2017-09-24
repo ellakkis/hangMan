@@ -20,6 +20,9 @@ public class HangMan {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        int wordGroupSelected = menu();
+        
         String[] words = {"write", "that","goast", "cocoa", "cat", "plain"};
         
         Random rand = new Random(System.currentTimeMillis());
@@ -125,4 +128,21 @@ public class HangMan {
     public static boolean inGuessedLetters(char letter, char[] enteredLetters) {
         return new String(enteredLetters).contains(String.valueOf(letter));
     }    
+
+    private static int menu() {
+        Scanner input = new Scanner(System.in);
+        
+        System.out.println("-- Word Group --");
+        System.out.println(
+            "  1) Fruits\n" +
+            "  2) Sports\n" +
+            "  3) Animals \n" +
+            "  4) Food\n "
+        );
+
+        System.out.print("Select an option: ");
+        int selection = input.nextInt();
+        input.nextLine();
+        return selection;
+    }
 }
