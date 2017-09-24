@@ -27,7 +27,7 @@ public class HangMan {
                     words = new String[] {"Apple", "Banana", "Orange", "cherry", "grapes"};
                     break;
                 case 2: //sports
-                    
+                    words = new String[] {"tennis", "soccer", "football", "swimming", "vollyball"};
                     break;
                 case 3: //animals
                     
