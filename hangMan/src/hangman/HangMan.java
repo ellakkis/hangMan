@@ -13,7 +13,7 @@ import java.util.Scanner;
  * @author ellakkis
  */
 public class HangMan {
-
+    public static String[] words;
     public static int triesCount = 0;
     public static boolean wordIsGuessed = false;
     /**
@@ -22,8 +22,23 @@ public class HangMan {
     public static void main(String[] args) {
         
         int wordGroupSelected = menu();
+        switch (wordGroupSelected) {
+                case 1: //fruits
+                    words = new String[] {"Apple", "Banana", "Orange", "cherry", "grapes"};
+                    break;
+                case 2: //sports
+                    
+                    break;
+                case 3: //animals
+                    
+                    break;
+                case 4: //food
+                    
+                    break;
+                default:
+                    break;
+            }
         
-        String[] words = {"write", "that","goast", "cocoa", "cat", "plain"};
         
         Random rand = new Random(System.currentTimeMillis());
         int  randWord = rand.nextInt(5);
